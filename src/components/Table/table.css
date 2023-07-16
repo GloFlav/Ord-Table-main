@@ -1,0 +1,27 @@
+table, td{
+    border-collapse: collapse;
+}
+#root-table, #root-table>tbody>tr>th, #root-table>tbody>tr>td {
+    border: 1px solid rgb(168, 161, 161);
+}
+#root-table>tbody>tr>td {
+    text-align: center;    
+}
+#root-table>tbody>tr:not(.result-row)>td {
+    padding: 5px;
+}
+.result-row>td {
+    padding: 0;
+    height: 1em;
+}
+.result-cell td {
+    padding: 5px;
+    text-align: left; 
+    vertical-align: top;
+}
+.result-cell td:not(:last-child) {
+    border-right: 1px solid rgb(168, 161, 161);;
+}
+.result-cell td:last-child {
+    display: flex;
+}
