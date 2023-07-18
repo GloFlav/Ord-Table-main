@@ -48,7 +48,7 @@ export default function App() {
             <Col className="pe-5" sm={10} style={{ width: "100%" }}>
                 <div className="my-2 p-3" style={{ overflowX: "auto" }}>
                     <h4 style={{ textAlign: "center" , marginLeft: "10%"}}>
-                        <LayoutList size="40" /> Ordonnancement de tache Tableau
+                     Ordonnancement de tache Tableau
                     </h4>
                     <Control />
                 </div>
@@ -94,6 +94,14 @@ export default function App() {
                             </div>
                            
                     </div>
+                    <div id="criticalPathGraph" className="my-0 p-3">
+                                {showCriticalPath &&  criticalPath && (
+                                    <>
+                                        <h5>Chémin critique</h5>
+                                        <CriticalPath />
+                                    </>
+                                )}
+                        </div>
                         <div className="my-2 p-3" style={{ overflowX: "auto" }}>
                                 {showLate && computed && (
                                     <>
@@ -102,14 +110,7 @@ export default function App() {
                                     </>
                                 )}
                         </div>
-                        <div id="criticalPathGraph" className="my-0 p-3">
-                                {showCriticalPath &&  criticalPath && (
-                                    <>
-                                        <h5>Chémin critique</h5>
-                                        <CriticalPath />
-                                    </>
-                                )}
-                        </div>
+                       
                 </div>
 
 
