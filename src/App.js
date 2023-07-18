@@ -5,39 +5,7 @@ import Control from "./components/Control/Control";
 import CriticalPath from "./components/CriticalPath/CriticalPath";
 import Table from "./components/Table/Table";
 import { ActivitySquare } from "lucide-react";
-import { Task } from "./utils/model/data.model";
 
-const createTask = (e, listTasks, dispatch) => {
-    e.target.value =
-        e.target.value > 26 ? 26 : e.target.value < 1 ? 1 : e.target.value;
-    let list_tasks = [];
-    if (listTasks.length > e.target.value) {
-        list_tasks = listTasks.slice(0, e.target.value);
-        for (let i = 0; i < e.target.value; i++)
-            if (list_tasks[i].previous_tasks) {
-                list_tasks[i].previous_tasks = list_tasks[
-                    i
-                ].previous_tasks.filter(
-                    (p) =>
-                        list_tasks.includes(p) ||
-                        list_tasks.map((t) => t.id).includes(p)
-                );
-                if (!list_tasks[i].previous_tasks.length)
-                    list_tasks[i].previous_tasks = null;
-            }
-    } else {
-        list_tasks = listTasks.slice();
-        for (let i = listTasks.length; i < e.target.value; i++)
-            list_tasks.push(new Task(String.fromCharCode(i + 65)));
-    }
-
-    dispatch({
-        type: "INITIATE",
-        count: e.target.value,
-        list: list_tasks,
-        computabled: list_tasks.every((task) => task.duration),
-    });
-};
 
 export default function App() {
     const tasksCount = useSelector((state) => state.tasksCount);
@@ -54,6 +22,26 @@ export default function App() {
     const listTasks = useSelector((state) => state.listTasks);
     const computable = useSelector((state) => state.computable);
     const dispatch = useDispatch();
+    
+
+    const [showMarge, setShowMarge] = useState(false);
+    const [showEarly, setShowEarly] = useState(false);
+    const [showLate, setShowLate] = useState(false);
+    const [showCriticalPath, setShowCriticalPath] = useState(false);
+
+    useEffect(() => {
+        const timeout1 = setTimeout(() => setShowMarge(true), 2000);
+        const timeout2 = setTimeout(() => setShowEarly(true), 4000);
+        const timeout3 = setTimeout(() => setShowLate(true), 6000);
+        const timeout4 = setTimeout(() => setShowCriticalPath(true), 8000);
+
+        return () => {
+        clearTimeout(timeout1);
+        clearTimeout(timeout2);
+        clearTimeout(timeout3);
+        clearTimeout(timeout4);
+        };
+    }, []);
 
     return (
         <Container id="main" as={Row} className="px-2" fluid >
@@ -88,7 +76,7 @@ export default function App() {
                 </div>
 
                 <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {computed && (
+                    {showMarge && computed && (
                         <>
                             <h5>Marges</h5>
                             <Table type="margin" />
@@ -96,7 +84,7 @@ export default function App() {
                     )}
                 </div>
                 <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {computed && (
+                    {showEarly &&  computed && (
                         <>
                             <h5>Dates au plus tôt</h5>
                             <Table type="early" />
@@ -104,7 +92,7 @@ export default function App() {
                     )}
                 </div>
                 <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {computed && (
+                    {showLate && computed && (
                         <>
                             <h5>Dates au plus tard</h5>
                             <Table type="late" />
@@ -112,7 +100,7 @@ export default function App() {
                     )}
                 </div>
                 <div id="criticalPathGraph" className="my-0 p-3">
-                    {criticalPath && (
+                    {showCriticalPath &&  criticalPath && (
                         <>
                             <h5>Chémin critique</h5>
                             <CriticalPath />
