@@ -52,61 +52,67 @@ export default function App() {
                     </h4>
                     <Control />
                 </div>
-                <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {Boolean(tasksCount) && (
-                        <>
-                            <h5>Données</h5>
-                            <div className="d-flex align-items-center" style={{gap: "15px"}}> 
-                                <Table type="input" /> 
-                                <Form.Group as={Row} controlId="formTasksCount">
-                                    <Button
-                                        className="mt-2 ms-2 col-md-1"
-                                        variant="primary"
-                                        disabled={!computable}
-                                        style={{ width: "100px"}}
-                                        onClick={() => dispatch({ type: "COMPUTE" })}
-                                    >
-                                        OK 
-                                    </Button>
-  
-                                </Form.Group>
+                <div className="">
+                    <div className="my-2 p-3" style={{ overflowX: "auto" }}>
+                        {Boolean(tasksCount) && (
+                            <>
+                                <h5>Données</h5>
+                                <div className="d-flex align-items-center" style={{gap: "15px"}}> 
+                                    <Table type="input" /> 
+                                    <Form.Group as={Row} controlId="formTasksCount">
+                                        <Button
+                                            className="mt-2 ms-2 col-md-1"
+                                            variant="primary"
+                                            disabled={!computable}
+                                            style={{ width: "100px"}}
+                                            onClick={() => dispatch({ type: "COMPUTE" })}
+                                        >
+                                            OK 
+                                        </Button>
+    
+                                    </Form.Group>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                    <div className="d-flex align-items-center"> 
+                            <div className="my-2 p-3" style={{ overflowX: "auto" }}>
+                                {showMarge && computed && (
+                                    <>
+                                        <h5>Marges</h5>
+                                        <Table type="margin" />
+                                    </>
+                                )}
                             </div>
-                        </>
-                    )}
+                            <div className="my-2 p-3" style={{ overflowX: "auto" }}>
+                                {showEarly &&  computed && (
+                                    <>
+                                        <h5>Dates au plus tôt</h5>
+                                        <Table type="early" />
+                                    </>
+                                )}
+                            </div>
+                           
+                    </div>
+                        <div className="my-2 p-3" style={{ overflowX: "auto" }}>
+                                {showLate && computed && (
+                                    <>
+                                        <h5>Dates au plus tard</h5>
+                                        <Table type="late" />
+                                    </>
+                                )}
+                        </div>
+                        <div id="criticalPathGraph" className="my-0 p-3">
+                                {showCriticalPath &&  criticalPath && (
+                                    <>
+                                        <h5>Chémin critique</h5>
+                                        <CriticalPath />
+                                    </>
+                                )}
+                        </div>
                 </div>
 
-                <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {showMarge && computed && (
-                        <>
-                            <h5>Marges</h5>
-                            <Table type="margin" />
-                        </>
-                    )}
-                </div>
-                <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {showEarly &&  computed && (
-                        <>
-                            <h5>Dates au plus tôt</h5>
-                            <Table type="early" />
-                        </>
-                    )}
-                </div>
-                <div className="my-2 p-3" style={{ overflowX: "auto" }}>
-                    {showLate && computed && (
-                        <>
-                            <h5>Dates au plus tard</h5>
-                            <Table type="late" />
-                        </>
-                    )}
-                </div>
-                <div id="criticalPathGraph" className="my-0 p-3">
-                    {showCriticalPath &&  criticalPath && (
-                        <>
-                            <h5>Chémin critique</h5>
-                            <CriticalPath />
-                        </>
-                    )}
-                </div>
+
             </Col>
         </Container>
     );
