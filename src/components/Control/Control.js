@@ -48,7 +48,7 @@ export default function Control() {
                     column
                     sm="12"
                     style={{
-                        fontFamily: "cursive",
+                        fontFamily: "arial",
                     }}
                 >
                     Nombre des tâches à ajouter : 
@@ -67,13 +67,7 @@ export default function Control() {
                     disabled={!computable}
                     onClick={() => dispatch({ type: "COMPUTE" })}
                 >
-                    OK 
-                    <img
-                        src="/loader.gif"
-                        alt="GIF Image"
-                        className="ms-2"
-                        style={{ width: '15px', height: '15px' }}
-                    />
+                    LANCER 
                 </Button>
             </Form.Group>
         </Form>
