@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Control from "./components/Control/Control";
 import CriticalPath from "./components/CriticalPath/CriticalPath";
 import Table from "./components/Table/Table";
-import { ActivitySquare } from "lucide-react";
+import { LayoutList } from "lucide-react";
 
 
 export default function App() {
@@ -48,7 +48,7 @@ export default function App() {
             <Col className="pe-5" sm={10} style={{ width: "100%" }}>
                 <div className="my-2 p-3" style={{ overflowX: "auto" }}>
                     <h4 style={{ textAlign: "center" , marginLeft: "10%"}}>
-                        <ActivitySquare size="40" /> ORD Tableau
+                        <LayoutList size="40" /> Ordonnancement de tache Tableau
                     </h4>
                     <Control />
                 </div>
